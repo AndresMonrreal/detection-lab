@@ -1,0 +1,10 @@
+<!-- Metasploitable (sysklogd) forwards syslog without timestamp or hostname: "sshd: message" -->
+<decoder name="msf-syslog-sshd">
+  <prematch>^sshd: </prematch>
+</decoder>
+
+<decoder name="msf-syslog-sshd-failed">
+  <parent>msf-syslog-sshd</parent>
+  <regex type="pcre2">Failed password for (?:invalid user )?(\S+) from (\S+) port (\d+)</regex>
+  <order>dstuser,srcip,srcport</order>
+</decoder>
